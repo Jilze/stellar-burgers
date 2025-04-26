@@ -6,10 +6,11 @@ import { logout } from '../../slices/user';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
-  return (
-    <ProfileMenuUI
-      handleLogout={() => useDispatch()(logout())}
-      pathname={pathname}
-    />
-  );
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  return <ProfileMenuUI handleLogout={handleLogout} pathname={pathname} />;
 };
