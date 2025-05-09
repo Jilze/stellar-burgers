@@ -13,7 +13,7 @@ export interface TNewOrderState {
   error: string | undefined;
 }
 
-const initialState: TNewOrderState = {
+export const initialState: TNewOrderState = {
   loading: false,
   order: null,
   error: undefined

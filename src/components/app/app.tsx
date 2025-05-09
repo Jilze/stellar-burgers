@@ -16,7 +16,7 @@ import {
   ResetPassword
 } from '@pages';
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { ProtectedRoute } from '../protected-route';
+import ProtectedRoute from '../protected-route';
 import { getIngredientsList } from '../../slices/ingredients';
 import { apiGetUser } from '../../slices/user';
 

@@ -3,27 +3,28 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
 import { isAuthCheckedSelector } from '../../slices/user';
 
-export const ProtectedRoute = ({
-  onlyUnAuth = false,
-  children
-}: {
+type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
   children: React.ReactElement;
+};
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  onlyUnAuth = false,
+  children
 }) => {
   const isAuthChecked = useSelector(isAuthCheckedSelector);
   const location = useLocation();
-  const shouldRedirect =
-    (!onlyUnAuth && !isAuthChecked) || (onlyUnAuth && isAuthChecked);
 
-  return shouldRedirect ? (
-    <Navigate
-      replace
-      to={onlyUnAuth ? location.state?.from || '/' : '/login'}
-      state={{ from: location }}
-    />
-  ) : (
-    children
-  );
+  const from = location.state?.from || '/';
+
+  if (!onlyUnAuth && !isAuthChecked) {
+    return <Navigate to='/login' state={{ from: location }} replace />;
+  }
+
+  if (onlyUnAuth && isAuthChecked) {
+    return <Navigate to={from} replace />;
+  }
+  return children;
 };
 
 export default ProtectedRoute;
