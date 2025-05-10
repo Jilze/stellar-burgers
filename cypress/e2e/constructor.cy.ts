@@ -8,7 +8,7 @@ const setupConstructorAliases = () => {
 const visitAppWithIngredients = () => {
   cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients.json' });
   cy.viewport(1300, 800);
-  cy.visit('http://localhost:4000/');
+  cy.visit('');
 };
 
 describe('ingredient addition test in the constructor', () => {
@@ -81,7 +81,7 @@ describe('order creation test', () => {
     cy.setCookie('accessToken', 'testAccessToken');
 
     cy.viewport(1300, 800);
-    cy.visit('http://localhost:4000/');
+    cy.visit('');
     setupConstructorAliases();
   });
 
